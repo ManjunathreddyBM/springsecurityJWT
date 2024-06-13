@@ -20,7 +20,7 @@ public class SecurityConfig {
 		
 		http.csrf(csrf -> csrf.disable());
 		http.authorizeHttpRequests(requests -> requests
-				.requestMatchers("/user/register","/home").permitAll()
+				.requestMatchers("/user/register","/home","/user/login").permitAll()
 				.anyRequest().authenticated());
 		http.formLogin(Customizer.withDefaults());
 		http.httpBasic(Customizer.withDefaults());

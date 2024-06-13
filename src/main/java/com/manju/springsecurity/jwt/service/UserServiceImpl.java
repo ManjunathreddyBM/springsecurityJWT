@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.manju.springsecurity.jwt.dto.LoginDto;
 import com.manju.springsecurity.jwt.dto.UserDto;
 import com.manju.springsecurity.jwt.model.User;
 import com.manju.springsecurity.jwt.repository.UserRepository;
@@ -33,4 +34,14 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
+	public User login(LoginDto loginDto) {
+		User user = userRepository.findByEmail(loginDto.getUserName());
+		if(user == null) {
+			throw new RuntimeException("USERNAME NOT FOUND...");
+		}
+		if(user != null && passwordEncoder.matches(loginDto.getPassword(), user.getPassword()))
+			return user;
+		else
+			throw new RuntimeException("Wrong Password");
+	}
 }

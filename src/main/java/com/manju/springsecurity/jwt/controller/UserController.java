@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.manju.springsecurity.jwt.dto.LoginDto;
 import com.manju.springsecurity.jwt.dto.UserDto;
 import com.manju.springsecurity.jwt.model.User;
 import com.manju.springsecurity.jwt.service.UserService;
@@ -25,5 +26,12 @@ public class UserController {
 	public ResponseEntity<User> register(@RequestBody UserDto userDto) {
 		User user = userService.register(userDto);
 		return new ResponseEntity(user, HttpStatusCode.valueOf(200));
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<User> login(@RequestBody LoginDto loginDto) {
+		
+		return new ResponseEntity(userService.login(loginDto), HttpStatusCode.valueOf(200));
+		
 	}
 }
