@@ -1,6 +1,8 @@
 package com.manju.springsecurity.jwt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.manju.springsecurity.jwt.dto.UserDto;
@@ -13,6 +15,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Override
 	public User register(UserDto userDto) {
 		User user = new User();
@@ -21,7 +26,10 @@ public class UserServiceImpl implements UserService {
 		user.setLastname(userDto.getLastNAme());
 		user.setEmail(userDto.getEmail());
 		user.setRole(userDto.getRole());
-		user.setPassword(userDto.getPassword());
+		System.out.println("PASSWORD BEFORE ENCODE >>>>>> " + userDto.getPassword());
+		String pass = passwordEncoder.encode(userDto.getPassword());
+		System.out.println("PASSWORD AFTER ENCODE>>>>>> " + pass);
+		user.setPassword(pass);
 		return userRepository.save(user);
 	}
 
