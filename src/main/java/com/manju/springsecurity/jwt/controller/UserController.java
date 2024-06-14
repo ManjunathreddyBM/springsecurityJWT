@@ -34,4 +34,12 @@ public class UserController {
 		return new ResponseEntity(userService.login(loginDto), HttpStatusCode.valueOf(200));
 		
 	}
+	
+	@PostMapping("/signin")
+	public ResponseEntity<User> signIn(@RequestBody LoginDto loginDto) {
+		System.out.println(">>>>>>>>>>>>>>>> signIn <<<<<<<<<<<<<<<<<<");
+
+		return new ResponseEntity(userService.loginWithJwt(loginDto), HttpStatusCode.valueOf(200));
+		
+	}
 }

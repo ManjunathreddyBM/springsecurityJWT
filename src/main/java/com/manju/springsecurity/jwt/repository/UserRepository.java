@@ -7,6 +7,6 @@ import com.manju.springsecurity.jwt.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	User save(User user);
 
-	User findByEmail(String userName);
+	User findByEmail(String email);
 
 }
