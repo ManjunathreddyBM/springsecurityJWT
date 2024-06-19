@@ -52,6 +52,7 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		System.out.println(">>>>>>>>>>>>>>>> authenticationProvider <<<<<<<<<<<<<<<<<<");
 
@@ -65,5 +66,7 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
+	
+	
 	
 }
